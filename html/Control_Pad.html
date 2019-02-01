@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="../css/custom/MMI.css">
+  <!-- Bootstrap Toggle CSS -->
+  <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.4.0/css/bootstrap4-toggle.min.css" rel="stylesheet">
+  <!-- Font awesome CSS -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <!-- round button CSS -->
+  <!--link rel="stylesheet" type="text/css" href="../css/Custom/MMI.css"  -->
+
+</head>
+
+<body>
+  <!--<script src="../scripts/main.js"></script>-->
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+  <div class="container-fluid border">
+    <div class="row d-flex m-1 p-1">
+      <div class="flex-fill">
+        <h1><span class="d-block flex-fill border badge badge-success">AGV System</span></h1>
+      </div>
+      <div class="flex-fill">
+        <h1><span class="d-block flex-fill border badge badge-danger">AGV_No_001</span></h1>
+      </div>
+      <div class="flex-fill">
+        <h1><span class="d-block flex-fill border badge badge-warning">User</span></h1>
+      </div>
+      <div class="flex-fill">
+        <h1><span class="d-block flex-fill border badge badge-primary">Login<!--<script>document.write('v'+process.env.npm_package_version)</script>--></span></h1>
+      </div>
+    </div>
+    <div class="row d-flex">
+      <div id="lblAlarmMsg" class="alert alert-primary flex-fill m-1" role="alert">
+        Alarm Msg
+      </div>
+    </div>
+    <div class="row border">
+      <div class="col-3 border">
+        <div class="row p-1">
+          <button id="btnInitial" type="button" class="btn btn-outline-secondary btn-lg btn-block">Initial</button>
+        </div>
+        <div class="row p-1">
+          <button id="btnAlarmReset" type="button" class="btn btn-outline-secondary btn-lg btn-block">Alarm Reset</button>
+        </div>
+        <div class="row p-1">
+          <button id="btnBuzzerOff" class="btn btn-outline-secondary btn-lg btn-block">Buzzer Off</button>
+        </div>
+        <!--
+              <div class="form-check form-check-inline p-1">
+                <label for="inlineCheckbox1" class="form-check-label">Run Mode：</label>
+                <input type="checkbox" checked data-toggle="toggle" data-on="Start" data-off="Stop" data-onstyle="success" data-offstyle="danger">
+              </div>
+              -->
+        <div class="form-check form-check-inline p-1">
+          <label for="inlineCheckbox1" class="form-check-label">Auto Mode：</label>
+          <input type="checkbox" checked data-toggle="toggle" data-on="Auto" data-off="Manual" data-onstyle="success" data-offstyle="danger">
+        </div>
+        <!--
+              <div class="card text-center m-2 p-1" >
+                <div class="card-body p-1">
+                  <h5 class="card-text p-1">Mileage</h5>
+                  <p class="card-text">12km</p>
+                </div>
+              </div>
+              -->
+        <div class="card text-center m-2 p-1">
+          <div class="card-body p-1">
+            <h5 class="card-text">Battery</h5>
+            <p>
+              <div class="progress">
+                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%">75%</div>
+              </div>
+            </p>
+          </div>
+        </div>
+        <div class="card text-center m-2 p-1">
+          <div class="card-body p-1">
+            <h5 class="card-text">System Time</h5>
+            <p class="card-text" id="lblDateTime">2019/01/08 19:19:00</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-9 border">
+        <div class="container m-1">
+          <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+
+            <li class="nav-item">
+              <a class="nav-link" id="pills-Message-tab" data-toggle="pill" href="#pills-Message" role="tab" aria-controls="pills-Message" aria-selected="false">Status</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="pills-Alarm-tab" data-toggle="pill" href="#pills-Alarm" role="tab" aria-controls="pills-Alarm" aria-selected="false">Alarm</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" id="pills-Control-tab" data-toggle="pill" href="#pills-Control" role="tab" aria-controls="pills-Control" aria-selected="true">Control</a>
+            </li>
+          </ul>
+          <div class="p-1 tab-content border" id="pills-tabContent">
+            <div class="tab-pane fade show active" id="pills-Control" role="tabpanel" aria-labelledby="pills-Control-tab">
+              <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                <li class="nav-item">
+                  <a class="nav-link active" id="pills-Motion-tab" data-toggle="pill" href="#pills-Motion" role="tab" aria-controls="pills-Motion" aria-selected="true">Motion</a>
+                </li>
+                <!--
+                  <li class="nav-item">
+                    <a class="nav-link" id="pills-Robot-tab" data-toggle="pill" href="#pills-Robot" role="tab" aria-controls="pills-Robot" aria-selected="false">Robot</a>
+                  </li>
+                  -->
+                <li class="nav-item">
+                  <a class="nav-link" id="pills-ZAxle-tab" data-toggle="pill" href="#pills-ZAxle" role="tab" aria-controls="pills-ZAxle" aria-selected="false">Z-Axle</a>
+                </li>
+                <!--
+                  <li class="nav-item">
+                    <a class="nav-link" id="pills-Battery-tab" data-toggle="pill" href="#pills-Battery" role="tab" aria-controls="pills-Battery" aria-selected="false">Battery</a>
+                  </li>
+                  -->
+              </ul>
+              <div class="tab-content" id="pills-tabContent">
+                <div class="tab-pane fade show active" id="pills-Motion" role="tabpanel" aria-labelledby="pills-Motion-tab">
+                  <div class="p-1 m-1 row">
+                    <div class="col-3">
+                      <fieldset disabled>
+                        <div class="form-row">
+                          <div class="form-group">
+                            <label for="txtTagID">Tag ID</label>
+                            <input type="text" class="form-control is-invalid" id="txtTagID" required>
+                            <div id="divTagIDValidation" class="invalid-feedback">
+                              No Tag Detected
+                            </div>
+                          </div>
+                          <div class="form-row">
+                            <div class="col-6">
+                              <label for="txtTagX">X</label>
+                              <input type="text" class="form-control" id="txtTagX">
+                            </div>
+                            <div class="col-6">
+                              <label for="txtTagY">Y</label>
+                              <input type="text" class="form-control " id="txtTagY">
+                            </div>
+                          </div>
+                        </div>
+                      </fieldset>
+                    </div>
+                    <div class="col-9">
+                      <div class="btn-group btn-group-toggle d-flex" data-toggle="buttons">
+                        <label class="btn btn-outline-info flex-fill active">
+                              <input type="radio" name="options" id="option1" autocomplete="off" checked> Low(5 m / min)
+                            </label>
+                        <label class="btn btn-outline-info flex-fill">
+                              <input type="radio" name="options" id="option2" autocomplete="off"> Middle(10 m / min)
+                            </label>
+                        <label class="btn btn-outline-info flex-fill">
+                              <input type="radio" name="options" id="option3" autocomplete="off"> High(30 m / min)
+                            </label>
+                      </div>
+
+                      <div class="row m-1 p-1 ">
+                        <div class="col-4 d-flex justify-content-center">
+                          <button id="btnTestAgvState" type="button" class="btn btn-outline-secondary  btn-sq-lg">
+                              
+                            </button>
+                        </div>
+                        <div class="col-4 d-flex justify-content-center">
+                          <button id="btnMoveForward" type="button" class="btn btn-outline-secondary  btn-sq-lg">
+                              <i class="fas fa-long-arrow-alt-up fa-5x"></i>
+                            </button>
+                        </div>
+                        <div class="col-4 d-flex justify-content-center">
+                          <button id="btnBrcState" type="button" class="btn btn-outline-secondary btn-sq-lg">
+                              
+                            </button>
+                        </div>
+                      </div>
+                      <div class="row m-1 p-1">
+                        <div class="col-4 d-flex justify-content-center">
+                          <button id="btnMoveLeft" type="button" class="btn btn-outline-secondary  btn-sq-lg">
+                              <i class="fas fa-long-arrow-alt-left fa-5x"></i>
+                            </button>
+                        </div>
+                        <div class="col-4 d-flex justify-content-center ">
+                          <button id="btnMoveStop" type="button" class="btn btn-danger btn-rounded ">
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Stop&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            </button>
+                        </div>
+                        <div class="col-4 d-flex justify-content-center">
+                          <button id="btnMoveRight" type="button" class="btn btn-outline-secondary btn-sq-lg">
+                              <i class="fas fa-long-arrow-alt-right fa-5x"></i>
+                            </button>
+                        </div>
+                      </div>
+                      <div class="row m-1 p-1">
+                        <div class="col-4 d-flex justify-content-center">
+                          <button type="button" class="btn btn-outline-secondary  btn-sq-lg">
+                              
+                            </button>
+                        </div>
+                        <div class="col-4 d-flex justify-content-center">
+                          <button id="btnMoveBackward" type="button" class="btn btn-outline-secondary  btn-sq-lg">
+                              <i class="fas fa-long-arrow-alt-down fa-5x"></i>
+                            </button>
+                        </div>
+                        <div class="col-4 d-flex justify-content-center">
+                          <button type="button" class="btn btn-outline-secondary btn-sq-lg">
+                            </button>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+                <div class="tab-pane fade" id="pills-Robot" role="tabpanel" aria-labelledby="pills-Robot-tab">
+                  Robot
+                </div>
+                <div class="tab-pane fade border" id="pills-ZAxle" role="tabpanel" aria-labelledby="pills-ZAxle-tab">
+                  <div class="row m-5 p-1 ">
+                    <button id="btnZAxleUp" type="button" class="btn btn-outline-secondary btn-lg btn-block"><i class="fas fa-long-arrow-alt-up fa-2x">UP</i></button>
+                  </div>
+                  <div class="row m-5 p-1 ">
+                    <button id="btnZAxleStop" type="button" class="btn btn-outline-danger btn-lg btn-block"><i class="fas fa-stop-circle fa-2x">Stop</i></button>
+                  </div>
+                  <div class="row m-5 p-1 ">
+                    <button id="btnZAxleDown" type="button" class="btn btn-outline-secondary btn-lg btn-block"><i class="fas fa-long-arrow-alt-down fa-2x">Down</i></button>
+                  </div>
+                </div>
+                <div class="tab-pane fade" id="pills-Battery" role="tabpanel" aria-labelledby="pills-Battery-tab">
+                  Battery
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane fade" id="pills-Message" role="tabpanel" aria-labelledby="pills-Message-tab">
+
+            </div>
+            <div class="tab-pane fade" id="pills-Alarm" role="tabpanel" aria-labelledby="pills-Alarm-tab">
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!---<script src="../node_modules/jquery/dist/jquery.slim.min.js" type="text/javascript"></script>-->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.4.0/js/bootstrap4-toggle.min.js"></script>
+    <!--script src="../scripts/MMI.js" type="text/javascript"></script-->
+
+</body>
+
+</html>
